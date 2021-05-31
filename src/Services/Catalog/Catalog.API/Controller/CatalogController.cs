@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Catalog.API.Controller
 {
      [ApiController]
-     [Route("api/v1/[controller")]
+     [Route("api/v1/[controller]")]
     public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _repository;
@@ -35,7 +35,9 @@ namespace Catalog.API.Controller
                 return NotFound ();
             return Ok(products);
         }
-        [HttpGet("{id:length(24)}",Name = "GetProduct")]
+        //[HttpGet("{id:length(24)}",Name = "GetProduct")]
+        [HttpGet]
+        [Route("[action]/{id}", Name = "GetProductById")]
         [ProducesResponseType(typeof(Product), (int)StatusCodes.Status200OK)]
         [ProducesResponseType((int)StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Product>> GetProductById(string id)
